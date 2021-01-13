@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-
+    [SerializeField] float RCSThrust = 100f;
+    [SerializeField] float ThrusterPower = 100f;
     Rigidbody rigid; //this is a variable
     AudioSource Boosters;
 
@@ -27,17 +28,42 @@ public class Rocket : MonoBehaviour
         Rotate();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Death":
+                {
+                    print("Dead");
+                    break;
+                }
+            case "Energy":
+                {
+                    print("Energy");
+                    break;
+                }
+            case "":
+                {
+                    print("OK");
+                    break;
+                }
+        }
+    }
+
     private void Rotate()
     {
         rigid.freezeRotation = true; //take manual control of rotation
 
+        float rotationSpeed = RCSThrust * Time.deltaTime; //rotates based on frames per second
+        
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.forward);
+            
+            transform.Rotate(Vector3.forward * rotationSpeed);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward);
+            transform.Rotate(-Vector3.forward * rotationSpeed);
         }
 
         rigid.freezeRotation = false; //resume physics control of rotation
@@ -45,9 +71,10 @@ public class Rocket : MonoBehaviour
 
     private void Thrust()
     {
+        float ThrustSpeed = ThrusterPower * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
-            rigid.AddRelativeForce(Vector3.up);
+            rigid.AddRelativeForce(Vector3.up * ThrustSpeed);
             if (!Boosters.isPlaying)
             {
                 Boosters.Play();
