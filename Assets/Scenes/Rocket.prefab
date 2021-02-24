@@ -62,7 +62,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6348c41aeda11ab469f4e9283e9d474d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.649
   m_Pitch: 2.03
@@ -162,6 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RCSThrust: 150
   ThrusterPower: 900
+  Engine: {fileID: 8300000, guid: 6348c41aeda11ab469f4e9283e9d474d, type: 3}
+  LvlComplete: {fileID: 8300000, guid: e41df390549be314bb83826cd80c21d0, type: 3}
+  Shocked: {fileID: 8300000, guid: 0af9582c8e655984d8fee885b385690f, type: 3}
 --- !u!1 &3091034755457309661
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd14b4de0f43bac4a8b3609f7e9dfdbe, type: 2}
+  - {fileID: 2100000, guid: 4a45e990f060ac04ab32b5c182fbc212, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -408,7 +411,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd14b4de0f43bac4a8b3609f7e9dfdbe, type: 2}
+  - {fileID: 2100000, guid: 4a45e990f060ac04ab32b5c182fbc212, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
