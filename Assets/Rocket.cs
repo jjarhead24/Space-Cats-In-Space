@@ -10,6 +10,13 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip Engine;
     [SerializeField] AudioClip LvlComplete;
     [SerializeField] AudioClip Shocked;
+    [SerializeField] ParticleSystem EngineParticle;
+    [SerializeField] ParticleSystem SuccessParticle;
+    [SerializeField] ParticleSystem DeathParticle;
+    [SerializeField] float fuel = 1000;
+
+    
+
     Rigidbody rigid; //this is a variable
     AudioSource SoundPlayer;
 
@@ -21,6 +28,7 @@ public class Rocket : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         SoundPlayer = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -34,6 +42,10 @@ public class Rocket : MonoBehaviour
 
     private void ProcessInput()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         Thrust();
         Rotate();
     }
@@ -42,13 +54,17 @@ public class Rocket : MonoBehaviour
     {
         if (CurrentState != State.Alive) {return;}
 
+
+
         switch (collision.gameObject.tag)
         {
             case "Death":
                 {
                     CurrentState = State.Dying;
                     SoundPlayer.Stop();
+                    EngineParticle.Stop();
                     SoundPlayer.PlayOneShot(Shocked);
+                    DeathParticle.Play();
                     Invoke("LoadAfterDeath", 2.2f);
                     break;
                 }
@@ -61,7 +77,9 @@ public class Rocket : MonoBehaviour
                 {
                     CurrentState =State.Trancending;
                     SoundPlayer.Stop();
+                    EngineParticle.Stop();
                     SoundPlayer.PlayOneShot(LvlComplete);
+                    SuccessParticle.Play();
                     Invoke("LoadNextLvl", 1f); 
                     break;
                 }
@@ -74,14 +92,31 @@ public class Rocket : MonoBehaviour
 
     private void LoadAfterDeath()
     {
-        SceneManager.LoadScene(0);
+        Scene currentScene = SceneManager.GetActiveScene();
+        int nextLevel = currentScene.buildIndex;
+        nextLevel -= 1;
+        if (nextLevel == -1)
+        {
+            nextLevel = 0;
+        }
+        SceneManager.LoadScene(nextLevel);
+
     }
 
     private void LoadNextLvl()
     {
-
+        Scene currentScene = SceneManager.GetActiveScene();
+        int nextLevel = currentScene.buildIndex;
+        nextLevel += 1;
+        if (nextLevel == 10)
+        {
+            return; //TODO add a win screen after level 10 is complete
+        }
+        else
+        {
+            SceneManager.LoadScene(nextLevel);
+        }
         
-        SceneManager.LoadScene(1); //allow more levels to load
     }
 
     private void Rotate()
@@ -108,16 +143,17 @@ public class Rocket : MonoBehaviour
         float ThrustSpeed = ThrusterPower * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
-            rigid.AddRelativeForce(Vector3.up * ThrustSpeed);
+            rigid.AddRelativeForce(Vector3.up * ThrustSpeed *Time.deltaTime);
             if (!SoundPlayer.isPlaying)
             {
                 SoundPlayer.PlayOneShot(Engine);
             }
-            
+            EngineParticle.Play();
         }
         else
         {
             SoundPlayer.Stop();
+            EngineParticle.Stop();
         }
     }
 }

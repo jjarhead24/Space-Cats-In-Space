@@ -44,7 +44,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 500
+  m_Range: 100
   m_SpotAngle: 68.4
   m_InnerSpotAngle: 15.561216
   m_CookieSize: 10
@@ -101,6 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1898709660176413396}
+  - component: {fileID: 747446725}
   m_Layer: 0
   m_Name: Light
   m_TagString: Death
@@ -124,6 +125,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &747446725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856307023435702444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3859238ddf47a434baf0edb8f043b271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 0.5, y: 0.5, z: 0.5}
+  period: 16
+  movementFactor: 0
 --- !u!1001 &3301878064789892644
 PrefabInstance:
   m_ObjectHideFlags: 0
