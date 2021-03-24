@@ -14,6 +14,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem SuccessParticle;
     [SerializeField] ParticleSystem DeathParticle;
     [SerializeField] float fuel = 1000;
+    public bool KeyObtained = false;
 
     
 
@@ -81,6 +82,11 @@ public class Rocket : MonoBehaviour
                     SoundPlayer.PlayOneShot(LvlComplete);
                     SuccessParticle.Play();
                     Invoke("LoadNextLvl", 1f); 
+                    break;
+                }
+            case "Key":
+                {
+                    KeyObtained = true;
                     break;
                 }
             case "":

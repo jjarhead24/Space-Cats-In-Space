@@ -7,6 +7,7 @@ TagManager:
   - Friendly
   - Energy
   - Death
+  - Key
   layers:
   - Default
   - TransparentFX
