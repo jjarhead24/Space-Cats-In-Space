@@ -5,15 +5,19 @@ using UnityEngine;
 public class CageLidOpener : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Rocket Open;
     void Start()
     {
-        bool open;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //open = FindObjectOfType<KeyObtained>();
+        if (Open.KeyObtained)
+        {
+            Destroy(gameObject);
+        }
+        else { return; }
     }
 }
