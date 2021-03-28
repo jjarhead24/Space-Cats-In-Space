@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f031d8856f1f94794b61d9026b1ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RCSThrust: 150
+  RCSThrust: 300
   ThrusterPower: 30000
   Engine: {fileID: 8300000, guid: 6348c41aeda11ab469f4e9283e9d474d, type: 3}
   LvlComplete: {fileID: 8300000, guid: e41df390549be314bb83826cd80c21d0, type: 3}
@@ -171,6 +171,8 @@ MonoBehaviour:
   EngineParticle: {fileID: 198100719031569652}
   SuccessParticle: {fileID: 198631066017732999}
   DeathParticle: {fileID: 198204746085422858}
+  fuel: 1000
+  KeyObtained: 0
 --- !u!95 &920397020
 Animator:
   serializedVersion: 3

@@ -91,7 +91,6 @@ public class Rocket : MonoBehaviour
                 }
             case "":
                 {
-                    KeyObtained = true;
                     break;
                 }
         }
