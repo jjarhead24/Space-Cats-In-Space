@@ -13,7 +13,6 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem EngineParticle;
     [SerializeField] ParticleSystem SuccessParticle;
     [SerializeField] ParticleSystem DeathParticle;
-    [SerializeField] float fuel = 1000;
     public bool KeyObtained = false;
 
     
@@ -101,9 +100,9 @@ public class Rocket : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         int nextLevel = currentScene.buildIndex;
         nextLevel -= 1;
-        if (nextLevel == -1)
+        if (nextLevel == 0)
         {
-            nextLevel = 0;
+            nextLevel = 1;
         }
         SceneManager.LoadScene(nextLevel);
 
@@ -113,15 +112,8 @@ public class Rocket : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         int nextLevel = currentScene.buildIndex;
-        nextLevel += 1;
-        if (nextLevel == 10)
-        {
-            return; //TODO add a win screen after level 10 is complete
-        }
-        else
-        {
-            SceneManager.LoadScene(nextLevel);
-        }
+        nextLevel += 1;   
+        SceneManager.LoadScene(nextLevel);
         
     }
 
