@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Rocket : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem DeathParticle;
     public bool KeyObtained = false;
 
-    
 
     Rigidbody rigid; //this is a variable
     AudioSource SoundPlayer;
@@ -38,6 +38,8 @@ public class Rocket : MonoBehaviour
         {
             ProcessInput();
         }
+
+
     }
 
     private void ProcessInput()
@@ -123,12 +125,12 @@ public class Rocket : MonoBehaviour
 
         float rotationSpeed = RCSThrust * Time.deltaTime; //rotates based on frames per second
         
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || CrossPlatformInputManager.GetButton("Left"))
         {
             
             transform.Rotate(Vector3.forward * rotationSpeed);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || CrossPlatformInputManager.GetButton("Right"))
         {
             transform.Rotate(-Vector3.forward * rotationSpeed);
         }
@@ -139,7 +141,7 @@ public class Rocket : MonoBehaviour
     private void Thrust()
     {
         float ThrustSpeed = ThrusterPower * Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || CrossPlatformInputManager.GetButton("Boost") )
         {
             rigid.AddRelativeForce(Vector3.up * ThrustSpeed *Time.deltaTime);
             if (!SoundPlayer.isPlaying)
@@ -147,6 +149,7 @@ public class Rocket : MonoBehaviour
                 SoundPlayer.PlayOneShot(Engine);
             }
             EngineParticle.Play();
+            
         }
         else
         {
